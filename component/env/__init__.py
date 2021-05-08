@@ -28,3 +28,7 @@ class IEnvironment(abc.ABC):
 	@abc.abstractmethod
 	def get_action_mask(self):
 		pass
+
+	@abc.abstractmethod
+	def get_action_size(self) -> int:
+		pass

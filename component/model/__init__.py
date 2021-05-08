@@ -15,9 +15,9 @@ class IModel(abc.ABC):
 		pass
 
 	@abc.abstractmethod
-	def load(self, model_path):
+	def load(self):
 		pass
 
 	@abc.abstractmethod
-	def save(Self, model_path):
+	def save(self):
 		pass
