@@ -1,34 +1,14 @@
-import abc
+from .env import IEnvironment
+from .env_cartpole import EnvironmentCartPole
 
-class IEnvironment(abc.ABC):
+# Constants
+ENV_TYPES = [
+	'cartpole'
+]
 
-	def __init__(self, index:str=''):
-		self._setup(index)
+# Factory
+def Environment(env_type:str) -> IEnvironment:
+	assert env_type in ENV_TYPES, f"There isn't a environment which type is '{env_type}'."
 
-	@abc.abstractmethod
-	def _setup(self, index):
-		pass
-
-	@abc.abstractmethod
-	def get_state(self):
-		pass
-
-	@abc.abstractmethod
-	def get_reward(self) -> float:
-		pass
-
-	@abc.abstractmethod
-	def run_action(self, action) -> bool:
-		pass
-
-	@abc.abstractmethod
-	def is_finish(self) -> bool:
-		pass
-
-	@abc.abstractmethod
-	def get_action_mask(self):
-		pass
-
-	@abc.abstractmethod
-	def get_action_size(self) -> int:
-		pass
+	if env_type == 'cartpole':
+		return EnvironmentCartPole()

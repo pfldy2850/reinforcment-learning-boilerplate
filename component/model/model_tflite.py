@@ -1,4 +1,4 @@
-from . import IModel
+from .model import IModel
 import os
 import tensorflow as tf
 import numpy as np
@@ -34,5 +34,5 @@ class ModelTFLite(IModel):
 		self._output_shape = output_details[0]['shape']
 		self._output_index = output_details[0]['index']
 
-	def save(self):
+	def save(self, tflite:bool=False):
 		assert False, "ModelTFLite cannot save the model."

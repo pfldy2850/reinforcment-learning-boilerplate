@@ -1,19 +1,8 @@
-import abc
+from .learner import ILearner
+from ..memory import Memory
 
-class ILearner(abc.ABC):
 
-	def __init__(self, model, memory):
-		self._model 	= model
-		self._memory 	= memory
+def Learner(model, mem_type:str='deque') -> ILearner:
+	memory 		= Memory(mem_type)
 
-	def train(self):
-		assert not self._memory.is_empty(), "Memory is empty."
-
-		self._model.train(self._memory.get_all())
-		self._memory.clear()
-
-	def save(self):
-		self._model.save()
-
-	def load(self):
-		self._model.load()
+	return ILearner(model, memory)

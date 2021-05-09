@@ -1,4 +1,4 @@
-from . import IMemory
+from .memory import IMemory
 from collections import deque
 
 class MemoryDeque(IMemory):
@@ -8,6 +8,9 @@ class MemoryDeque(IMemory):
 
 	def append(self, data) -> None:
 		self._instance.append(data)
+
+	def concat(self, data) -> None:
+		self._instance += data
 
 	def clear(self) -> None:
 		self._instance.clear()

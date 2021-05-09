@@ -1,27 +1,17 @@
-import abc
+from .memory import IMemory
+from .memory_deque import MemoryDeque
 
-class IMemory(abc.ABC):
+# Constants
+MEM_TYPES = [
+	'deque',
+	'none'
+]
 
-	@abc.abstractmethod
-	def append(self, data) -> None:
-		pass
+# Factory
+def Memory(mem_type:str) -> IMemory:
+	assert mem_type in MEM_TYPES, f"There isn't a memory which type is '{mem_type}'."
 
-	@abc.abstractmethod
-	def clear(self) -> None:
-		pass
-
-	@abc.abstractmethod
-	def pop(self):
-		pass
-
-	@abc.abstractmethod
-	def get_all(self):
-		pass
-
-	@abc.abstractmethod
-	def length(self) -> int:
-		pass
-
-
-	def is_empty(self) -> bool:
-		return self.length() == 0
+	if mem_type == 'deque':
+		return MemoryDeque()
+	elif mem_type == 'none':
+		return None

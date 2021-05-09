@@ -1,23 +1,15 @@
-import abc
+from .model import IModel
+from .model_ac import ModelAC
+from .model_tflite import ModelTFLite
 
-class IModel(abc.ABC):
+# Constants
+MODEL_TYPES = [
+	'tflite'
+]
 
-	@abc.abstractmethod
-	def get_action_prob(self, state):
-		pass
+# Factory
+def Model(model_path, model_type:str) -> IModel:
+	assert model_type in MODEL_TYPES, f"There isn't a model which type is '{model_type}'."
 
-	@abc.abstractmethod
-	def get_action(self, state):
-		pass
-
-	@abc.abstractmethod
-	def train(self, data):
-		pass
-
-	@abc.abstractmethod
-	def load(self):
-		pass
-
-	@abc.abstractmethod
-	def save(self):
-		pass
+	if model_type == 'tflite':
+		return ModelTFLite(model_path)

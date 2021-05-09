@@ -1,4 +1,4 @@
-from . import IEnvironment
+from .env import IEnvironment
 import gym
 import numpy as np
 
@@ -34,3 +34,11 @@ class EnvironmentCartPole(IEnvironment):
 
 	def get_action_size(self) -> int:
 		return 2
+
+	def reset(self) -> None:
+		self._last_obs = self._env.reset()
+		self._last_rwd 	= 0
+		self._done		= False
+
+	def render(self):
+		self._env.render()
