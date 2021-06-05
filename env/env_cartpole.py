@@ -24,6 +24,7 @@ class EnvironmentCartPole(IEnvironment):
 		self._last_rwd = rwd
 		self._done = done
 
+		if done: self._env.close()
 		return done
 
 	def is_finish(self) -> bool:

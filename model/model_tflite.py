@@ -6,8 +6,7 @@ import numpy as np
 class ModelTFLite(IModel):
 
 	def __init__(self, model_path:str):
-		self._model_path = model_path
-		self.load()
+		super().__init__(model_path)
 
 	def get_action_prob(self, state):
 		self._interpreter.set_tensor(self._input_index, np.reshape(state, self._input_shape).astype(np.float32))
@@ -35,4 +34,4 @@ class ModelTFLite(IModel):
 		self._output_index = output_details[0]['index']
 
 	def save(self, tflite:bool=False):
-		assert False, "ModelTFLite cannot save the model."
+		pass

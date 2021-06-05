@@ -8,7 +8,7 @@ MEM_TYPES = [
 ]
 
 # Factory
-def Memory(mem_type:str) -> IMemory:
+def create_memory(mem_type:str) -> IMemory:
 	assert mem_type in MEM_TYPES, f"There isn't a memory which type is '{mem_type}'."
 
 	if mem_type == 'deque':

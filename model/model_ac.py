@@ -5,7 +5,7 @@ import tensorflow as tf
 import numpy as np
 
 class ModelAC(IModel):
-	def __init__(self, model_path:str, discount:float=0.99, batch_size:int=100):
+	def __init__(self, model_path:str, discount:float=0.99, batch_size:int=100, overwrite:bool=False):
 		self.create_model()
 		self.compile_model()
 		assert self._actor is not None, 'create actor model.'
@@ -13,9 +13,8 @@ class ModelAC(IModel):
 
 		self._discount 		= discount
 		self._batch_size 	= batch_size
-		self._model_path 	= model_path
 
-		self.save(tflite=True)
+		super().__init__(model_path, overwrite)
 
 	@abc.abstractmethod
 	def create_model(self) -> None:
