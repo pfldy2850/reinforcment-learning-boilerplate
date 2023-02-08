@@ -7,6 +7,10 @@ class IMemory(abc.ABC):
 		pass
 
 	@abc.abstractmethod
+	def concat(self, data) -> None:
+		pass
+
+	@abc.abstractmethod
 	def clear(self) -> None:
 		pass
 

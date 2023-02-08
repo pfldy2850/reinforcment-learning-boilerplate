@@ -1,10 +1,11 @@
-from . import IModel
+from .model import IModel
 import abc
 import os
 import tensorflow as tf
+import numpy as np
 
 class ModelAC(IModel):
-	def __init__(self, model_path:str, discount:float=0.99, batch_size:int=100):
+	def __init__(self, model_path:str, discount:float=0.99, batch_size:int=100, overwrite:bool=False):
 		self.create_model()
 		self.compile_model()
 		assert self._actor is not None, 'create actor model.'
@@ -12,9 +13,8 @@ class ModelAC(IModel):
 
 		self._discount 		= discount
 		self._batch_size 	= batch_size
-		self._model_path 	= model_path
 
-		self.save(tflite=True)
+		super().__init__(model_path, overwrite)
 
 	@abc.abstractmethod
 	def create_model(self) -> None:
@@ -51,10 +51,9 @@ class ModelAC(IModel):
 		# data -> state, action, reward, next_state, done, finish
 		states 		= np.array([ d[0] for d in data ])
 		actions 	= np.array([ d[1] for d in data ])
-		rewards 	= np.array([ d[2] for d in data ])
+		rewards 	= np.array([ [d[2]] for d in data ])
 		next_states = np.array([ d[3] for d in data ])
-
-		done 		= np.array([ 1 - int(d[4]) for d in data ])
+		done 		= np.array([ [1 - int(d[4])] for d in data ])
 
 		values 		= rewards + self._discount * self._critic.predict(next_states) * done
 		advantages 	= self._critic.predict(states) - values
@@ -70,7 +69,7 @@ class ModelAC(IModel):
 
 	def save(self, tflite:bool=False):
 		if not os.path.isdir(self._model_path): os.mkdir(self._model_path)
-		
+
 		self._actor.save_weights(os.path.join(self._model_path, 'actor.h5'))
 		self._critic.save_weights(os.path.join(self._model_path, 'critic.h5'))
 
