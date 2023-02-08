@@ -1,12 +1,16 @@
-from .env import IEnvironment
-from .env_cartpole import EnvironmentCartPole
 from enum import Enum, unique
 
+from .env import Env
+
+
 @unique
-class EEnvType(Enum):
-	CARTPOLE = 1
+class EnvType(Enum):
+    CARTPOLE = 1
+
 
 # Factory
-def create_environment(env_type:EEnvType) -> IEnvironment:
-	if env_type == EEnvType.CARTPOLE:
-		return EnvironmentCartPole()
+def create_env(env_type: EnvType, *args, **kwargs) -> Env:
+    from .env_cartpole import CartPoleEnv
+
+    if env_type == EnvType.CARTPOLE:
+        return CartPoleEnv(*args, **kwargs)

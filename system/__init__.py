@@ -1,24 +1,17 @@
-from .system import ISystem
-from .system_mono import SystemMono
-from actor import EActorType
+from enum import Enum, unique
 
-def create_system(
-    actor_type:EActorType=EActorType.NORMAL,
-    actor_num:int=1,
-    env_num:int=1,
-    ) -> ISystem:
-
-    assert actor_num > 0,       "actor_num must be greater than 1"
-    assert env_num > 0,         "env_num must be greater than 1"
-
-    if actor_num == 1:
-        return SystemMono(
-            actor_type=actor_type,
-            actor_num=actor_num,
-            env_num=env_num
-        )
+from .system import System
 
 
+@unique
+class SystemType(Enum):
+    DQN = "dqn"
 
+
+def create_system(system_type: SystemType, *args, **kwargs) -> System:
+    from .system_dqn import DqnSystem
+
+    if system_type == SystemType.DQN:
+        return DqnSystem(*args, **kwargs)
 
     pass

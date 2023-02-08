@@ -1,15 +1,18 @@
-from .model import IModel
-from .model_ac import ModelAC
-from .model_tflite import ModelTFLite
+from enum import Enum, unique
 
-# Constants
-MODEL_TYPES = [
-	'tflite'
-]
+from .model import Model
+
+
+@unique
+class ModelType(Enum):
+    DENSE = "dense"
+
 
 # Factory
-def create_model(model_path, model_type:str) -> IModel:
-	assert model_type in MODEL_TYPES, f"There isn't a model which type is '{model_type}'."
+def create_model(model_type: ModelType, *args, **kwargs) -> Model:
+    if model_type == ModelType.DENSE:
+        from .model_dense import DenseModel
 
-	if model_type == 'tflite':
-		return ModelTFLite(model_path)
+        return DenseModel(*args, **kwargs)
+
+    return Model(*args, **kwargs)
