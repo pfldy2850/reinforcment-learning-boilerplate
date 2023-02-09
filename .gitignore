@@ -5,3 +5,6 @@ venv
 __pycache__
 
 testmodel
+
+logs
+lightning_logs

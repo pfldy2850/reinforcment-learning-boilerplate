@@ -5,6 +5,6 @@ import torch
 from torch import nn
 
 
-class Model(nn.Module, abc.ABC):
+class Model(nn.Module):
     def __init__(self, *args, **kwargs) -> None:
-        super().__init__()
+        super(Model, self).__init__()

@@ -1,6 +1,5 @@
-import abc
+import gym
 
 
-class Env(abc.ABC):
-    def __init__(self, *args, **kwargs) -> None:
-        super().__init__()
+class Env(gym.Env):
+    pass

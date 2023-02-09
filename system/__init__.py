@@ -9,7 +9,7 @@ class SystemType(Enum):
 
 
 def create_system(system_type: SystemType, *args, **kwargs) -> System:
-    from .system_dqn import DqnSystem
+    from .dqn.system_dqn import DqnSystem
 
     if system_type == SystemType.DQN:
         return DqnSystem(*args, **kwargs)
