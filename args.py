@@ -29,7 +29,7 @@ def get_args():
     parser.add_argument(
         "--env",
         type=EnvType,
-        default=EnvType.CARTPOLE,
+        default=EnvType.GYM,
         choices=list(EnvType),
     )
     parser.add_argument(

@@ -38,7 +38,7 @@ class DqnSystem(System):
     ) -> None:
 
         super().__init__(env, model, agent, *args, **kwargs)
-        self.save_hyperparameters()
+        self.save_hyperparameters(ignore=["env", "model", "agent"])
 
         self.env = env
 

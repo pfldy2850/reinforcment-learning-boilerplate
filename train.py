@@ -40,9 +40,8 @@ if __name__ == "__main__":
     trainer = Trainer(
         accelerator="cpu",
         devices=1 if torch.cuda.is_available() else None,  # limiting got iPython runs
-        max_epochs=150,
-        val_check_interval=50,
         logger=CSVLogger(save_dir="logs/"),
+        **conf["trainer"]
     )
 
     trainer.fit(

@@ -177,6 +177,7 @@ pycurl==7.45.1
 PyDispatcher==2.0.5
 pyerfa==2.0.0
 pyflakes==3.0.1
+pygame==2.1.0
 Pygments==2.11.2
 PyHamcrest==2.0.2
 pylint==2.14.5

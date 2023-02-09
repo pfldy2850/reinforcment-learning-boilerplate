@@ -6,14 +6,14 @@ from .env import Env
 @unique
 class EnvType(Enum):
     DEFAULT = "default"
-    CARTPOLE = "cartpole"
+    GYM = "GYM"
 
 
 # Factory
 def create_env(env_type: EnvType, *args, **kwargs) -> Env:
     from .env_gym import GymEnv
 
-    if env_type == EnvType.CARTPOLE:
-        return GymEnv("CartPole-v0")
+    if env_type == EnvType.GYM:
+        return GymEnv(*args, **kwargs)
 
     return Env(*args, **kwargs)

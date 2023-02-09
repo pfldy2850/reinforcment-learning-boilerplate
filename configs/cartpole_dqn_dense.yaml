@@ -1,4 +1,9 @@
-env: {}
+env:
+  id: CartPole
+  render_mode: human
 model: {}
 agent: {}
 system: {}
+trainer:
+  max_epochs: 500
+  val_check_interval: 50
